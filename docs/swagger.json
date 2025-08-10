@@ -11,7 +11,7 @@
   },
   "servers": [
     {
-      "url": "https://final-project-backend-rtvo.onrender.com"
+      "url": "https://tasteorama-backend.onrender.com"
     },
     {
       "url": "http://localhost:3000"

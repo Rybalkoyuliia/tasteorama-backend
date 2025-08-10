@@ -1,5 +1,5 @@
 {
-  "name": "final-project-backend",
+  "name": "tasteorama",
   "version": "1.0.0",
   "description": "",
   "type": "module",
@@ -17,12 +17,12 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Vladyslav-Avrashov/final-project-backend.git"
+    "url": "git+https://github.com/Rybalkoyuliia/tasteorama-backend"
   },
   "bugs": {
-    "url": "https://github.com/Vladyslav-Avrashov/final-project-backend/issues"
+    "url": "https://github.com/Rybalkoyuliia/tasteorama-backend/issues"
   },
-  "homepage": "https://github.com/Vladyslav-Avrashov/final-project-backend#readme",
+  "homepage": "https://github.com/Rybalkoyuliia/tasteorama-backend",
   "devDependencies": {
     "@eslint/js": "^9.31.0",
     "@redocly/cli": "^1.34.4",
