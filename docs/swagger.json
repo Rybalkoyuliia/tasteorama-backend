@@ -11,7 +11,7 @@
   },
   "servers": [
     {
-      "url": "https://final-project-backend-rtvo.onrender.com"
+      "url": "https://tasteorama-backend.onrender.com"
     },
     {
       "url": "http://localhost:3000"
@@ -288,18 +288,17 @@
     },
     "/api/users/current": {
       "get": {
-        "get": null,
         "tags": [
           "Users"
         ],
-        "summary": "Get current user",
-        "description": "Get the currently authenticated user",
-        "operationId": "getCurrentUser",
         "security": [
           {
             "bearerAuth": []
           }
         ],
+        "summary": "Get current user",
+        "operationId": "getCurrentUser",
+        "description": "Get the currently authenticated user",
         "responses": {
           "200": {
             "description": "Successfully retrieved current user",
@@ -312,14 +311,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized — token is missing or invalid",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/401"
-                }
-              }
-            }
+            "$ref": "#/components/responses/401"
           }
         }
       }
@@ -329,13 +321,14 @@
         "tags": [
           "Favorites"
         ],
-        "summary": "Get user's favorite recipes",
-        "description": "Returns a list of recipes marked as favorite by the authenticated user.",
         "security": [
           {
             "bearerAuth": []
           }
         ],
+        "summary": "Get user's favorite recipes",
+        "operationId": "getAllFavorites",
+        "description": "Returns a list of recipes marked as favorite by the authenticated user.",
         "responses": {
           "200": {
             "description": "A list of favorite recipes",
@@ -361,13 +354,14 @@
         "tags": [
           "Favorites"
         ],
-        "summary": "Add recipe to favorites",
-        "description": "Adds the specified recipe to the authenticated user's list of favorites.",
         "security": [
           {
             "bearerAuth": []
           }
         ],
+        "summary": "Add recipe to favorites",
+        "operationId": "addToFavorites",
+        "description": "Adds the specified recipe to the authenticated user's list of favorites.",
         "parameters": [
           {
             "in": "path",
@@ -399,6 +393,7 @@
             "bearerAuth": []
           }
         ],
+        "operationId": "removeFromFavorites",
         "parameters": [
           {
             "in": "path",
@@ -425,6 +420,8 @@
         "tags": [
           "Categories"
         ],
+        "security": [],
+        "operationId": "getAllCategories",
         "summary": "Get all recipe categories",
         "description": "Returns a list of all recipe categories from the database",
         "responses": {
@@ -441,8 +438,11 @@
               }
             }
           },
+          "404": {
+            "description": "No categories found (empty database)"
+          },
           "500": {
-            "description": "Server error"
+            "$ref": "#/components/responses/500"
           }
         }
       }
@@ -452,6 +452,8 @@
         "tags": [
           "Ingredients"
         ],
+        "security": [],
+        "operationId": "getAllIngredients",
         "summary": "Get all ingredients",
         "description": "Returns a list of all ingredients from the database",
         "responses": {
@@ -468,6 +470,9 @@
               }
             }
           },
+          "404": {
+            "description": "No ingredients found (empty database)"
+          },
           "500": {
             "description": "Server error"
           }
@@ -475,6 +480,33 @@
       }
     },
     "/api/recipes": {
+      "get": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Get all recipes",
+        "operationId": "getAllRecipes",
+        "description": "Get all recipes",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Successfully get a list of all recipes!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/recipe"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        }
+      },
       "post": {
         "tags": [
           "Recipes"
@@ -594,6 +626,8 @@
         "tags": [
           "Recipes"
         ],
+        "security": [],
+        "operationId": "getRecipeById",
         "summary": "Get recipe by ID",
         "description": "Returns a specific recipe by its MongoDB ObjectId",
         "parameters": [
@@ -620,10 +654,10 @@
             }
           },
           "400": {
-            "description": "Invalid recipe ID format"
+            "$ref": "#/components/responses/400"
           },
           "404": {
-            "description": "Recipe not found"
+            "$ref": "#/components/responses/404"
           }
         }
       },
@@ -679,43 +713,6 @@
       }
     },
     "schemas": {
-      "401": {
-        "description": "Unauthorized error",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "required": [
-                "status",
-                "message",
-                "data"
-              ],
-              "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 401
-                },
-                "message": {
-                  "type": "string",
-                  "example": "UnauthorizedError"
-                },
-                "data": {
-                  "type": "object",
-                  "required": [
-                    "message"
-                  ],
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Unauthorized"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
       "Category": {
         "$ref": "#/components/schemas/category"
       },
@@ -1102,6 +1099,43 @@
                     "message": {
                       "type": "string",
                       "example": "Data in use"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Server Error"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Server Error"
                     }
                   }
                 }

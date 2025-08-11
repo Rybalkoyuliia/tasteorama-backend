@@ -1,21 +1,16 @@
-get:
 tags:
   - Users
-summary: Get current user
-description: Get the currently authenticated user
-operationId: getCurrentUser
 security:
   - bearerAuth: []
+summary: Get current user
+operationId: getCurrentUser
+description: Get the currently authenticated user
 responses:
-  200:
+  '200':
     description: Successfully retrieved current user
     content:
       application/json:
         schema:
           $ref: ../../../components/schemas/user.yaml
-  401:
-    description: Unauthorized — token is missing or invalid
-    content:
-      application/json:
-        schema:
-          $ref: ../../../components/responses/401.yaml
+  '401':
+    $ref: ../../../components/responses/401.yaml

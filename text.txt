@@ -1,0 +1,29 @@
+# Оновити основні гілки
+git checkout main
+git pull origin main
+
+git checkout dev
+git pull origin dev
+
+# Створити робочу гілку від dev
+git checkout dev
+git checkout -b fix-auth-bug
+
+# Працювати — редагувати файли, потім комітити
+git add .
+git commit -m "опис змін"
+
+# Запушити робочу гілку
+git push -u origin fix-auth-bug
+
+# На GitHub зробити PR fix-auth-bug → dev
+
+# Після мерджу оновити dev
+git checkout dev
+git pull origin dev
+
+# Коли готово — зробити PR dev → main
+
+# Після мерджу оновити main
+git checkout main
+git pull origin main

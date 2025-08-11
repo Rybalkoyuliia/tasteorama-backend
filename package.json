@@ -1,5 +1,5 @@
 {
-  "name": "final-project-backend",
+  "name": "tasteorama-backend",
   "version": "1.0.0",
   "description": "",
   "type": "module",
@@ -13,19 +13,19 @@
     "preview-docs": "redocly preview-docs"
   },
   "keywords": [],
-  "author": "",
+  "author": "Yuliia Rybalko",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Vladyslav-Avrashov/final-project-backend.git"
+    "url": "git+https://github.com/Rybalkoyuliia/tasteorama-backend"
   },
   "bugs": {
-    "url": "https://github.com/Vladyslav-Avrashov/final-project-backend/issues"
+    "url": "https://github.com/Rybalkoyuliia/tasteorama-backend/issues"
   },
-  "homepage": "https://github.com/Vladyslav-Avrashov/final-project-backend#readme",
+  "homepage": "https://github.com/Rybalkoyuliia/tasteorama-backend#readme",
   "devDependencies": {
     "@eslint/js": "^9.31.0",
-    "@redocly/cli": "^1.34.4",
+    "@redocly/cli": "^2.0.3",
     "eslint": "^9.31.0",
     "globals": "^16.3.0",
     "nodemon": "^3.1.10"

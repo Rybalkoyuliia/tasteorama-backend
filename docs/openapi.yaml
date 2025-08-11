@@ -21,7 +21,7 @@ tags:
     description: Operations about recipes.
 
 servers:
-  - url: https://final-project-backend-rtvo.onrender.com
+  - url: https://tasteorama-backend.onrender.com
   - url: http://localhost:3000
 paths:
   /api/auth/login:
@@ -54,6 +54,8 @@ paths:
     get:
       $ref: ../swagger/paths/ingredients/get.yaml
   /api/recipes:
+    get:
+      $ref: ../swagger/paths/recipes/get.yaml
     post:
       $ref: ../swagger/paths/recipes/post.yaml
   /api/recipes/{id}:
