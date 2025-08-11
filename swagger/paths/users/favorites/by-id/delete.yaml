@@ -4,6 +4,7 @@ summary: Remove recipe from favorites
 description: Removes the specified recipe from the authenticated user's list of favorites.
 security:
   - bearerAuth: []
+operationId: removeFromFavorites
 parameters:
   - in: path
     name: id

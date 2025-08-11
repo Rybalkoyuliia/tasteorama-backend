@@ -1,9 +1,10 @@
 tags:
   - Favorites
-summary: Get user's favorite recipes
-description: Returns a list of recipes marked as favorite by the authenticated user.
 security:
   - bearerAuth: []
+summary: Get user's favorite recipes
+operationId: getAllFavorites
+description: Returns a list of recipes marked as favorite by the authenticated user.
 responses:
   200:
     description: A list of favorite recipes

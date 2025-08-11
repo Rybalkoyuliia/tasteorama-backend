@@ -1,5 +1,7 @@
 tags:
   - Ingredients
+security: []
+operationId: getAllIngredients
 summary: Get all ingredients
 description: Returns a list of all ingredients from the database
 responses:
@@ -11,5 +13,7 @@ responses:
           type: array
           items:
             $ref: '../../components/schemas/ingredient.yaml'
+  '404':
+    description: No ingredients found (empty database)
   '500':
     description: Server error
