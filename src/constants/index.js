@@ -16,5 +16,6 @@ export const sortList = ['asc', 'desc'];
 
 export const allowedOrigins = [
   'http://localhost:5173',
+  'http://localhost:3000',
   'https://tasteorama-eight.vercel.app',
 ];

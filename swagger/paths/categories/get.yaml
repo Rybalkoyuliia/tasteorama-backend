@@ -1,5 +1,7 @@
 tags:
   - Categories
+security: []
+operationId: getAllCategories
 summary: Get all recipe categories
 description: Returns a list of all recipe categories from the database
 responses:
@@ -11,5 +13,7 @@ responses:
           type: array
           items:
             $ref: '../../components/schemas/category.yaml'
+  '404':
+    description: No categories found (empty database)
   '500':
-    description: Server error
+    $ref: ../../components/responses/500.yaml

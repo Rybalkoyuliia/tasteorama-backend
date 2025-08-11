@@ -1,9 +1,10 @@
 tags:
   - Favorites
-summary: Add recipe to favorites
-description: Adds the specified recipe to the authenticated user's list of favorites.
 security:
   - bearerAuth: []
+summary: Add recipe to favorites
+operationId: addToFavorites
+description: Adds the specified recipe to the authenticated user's list of favorites.
 parameters:
   - in: path
     name: id
