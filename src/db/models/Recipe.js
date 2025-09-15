@@ -29,20 +29,19 @@ const recipeSchema = new Schema(
       ref: 'Category',
       required: true,
     },
-    ingredients: {
-      type: [
-        {
-          name: {
-            type: String,
-            required: true,
-          },
-          amount: {
-            type: String,
-            required: true,
-          },
+    ingredients: [
+      {
+        id: {
+          type: String,
+          ref: 'Ingredient',
+          required: true,
         },
-      ],
-    },
+        measure: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
     instructions: {
       type: String,
       required: true,

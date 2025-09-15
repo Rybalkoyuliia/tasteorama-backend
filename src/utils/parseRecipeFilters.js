@@ -1,12 +1,11 @@
 const parseString = (str) => {
   if (typeof str !== 'string') return;
-  return str.trim();
+  return str.trim().toLowerCase();
 };
 
 export const parseRecipeFilters = ({
   type,
   title,
-  ingredient,
   categories,
   ingredients,
   search,
@@ -14,7 +13,7 @@ export const parseRecipeFilters = ({
 }) => {
   const parsedType = parseString(type);
   const parsedTitle = parseString(title);
-  const parsedIngredient = parseString(ingredient || ingredients);
+  const parsedIngredient = parseString(ingredients);
   const parsedCategory = parseString(categories);
   const parsedSearch = parseString(search);
   const parsedUserId = parseString(userId);
@@ -22,7 +21,7 @@ export const parseRecipeFilters = ({
   return {
     ...(parsedType && { type: parsedType }),
     ...(parsedTitle && { title: parsedTitle }),
-    ...(parsedIngredient && { ingredientName: parsedIngredient }),
+    ...(parsedIngredient && { ingredients: parsedIngredient }),
     ...(parsedCategory && { category: parsedCategory }),
     ...(parsedSearch && { searchQuery: parsedSearch }),
     ...(parsedUserId && { userId: parsedUserId }),

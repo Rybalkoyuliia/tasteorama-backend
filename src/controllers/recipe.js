@@ -12,7 +12,12 @@ export const getRecipesController = async (req, res) => {
   const userId = req.user?._id;
   const { page, perPage } = parsePaginationParams(req.query);
   const { sortOrder, sortBy } = parseSortParams(req.query, recipesSortFields);
-  const filters = parseRecipeFilters({ ...req.query, userId });
+
+  const filters = parseRecipeFilters({
+    ...req.query,
+    userId,
+    ingredients: req.query.ingredients,
+  });
 
   const data = await getRecipes({ page, perPage, sortBy, sortOrder, filters });
   res.json({
