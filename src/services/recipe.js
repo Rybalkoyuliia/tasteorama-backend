@@ -61,19 +61,8 @@ export const getRecipeById = async (id) => {
   const recipe = await Recipe.findById(id);
 
   if (!recipe) return null;
-  const ingredientIds = recipe.ingredients.map((ing) => ing.id);
 
-  const ingredients = await Ingredient.find({ _id: { $in: ingredientIds } });
-  const ingredientMap = {};
-  ingredients.forEach((ing) => {
-    ingredientMap[ing._id.toString()] = ing;
-  });
-  recipe.ingredients = recipe.ingredients.map((ing) => ({
-    ...ing,
-    name: ingredientMap[ing.id]?.name || null,
-  }));
-  console.log(recipe);
-  return recipe;
+  return recipe.populate('ingredients.id', 'name');
 };
 
 export const deleteOwnRecipe = async (id) => await Recipe.findByIdAndDelete(id);
