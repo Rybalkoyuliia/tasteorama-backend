@@ -41,7 +41,7 @@ export const getRecipes = async ({
     .skip(skip)
     .limit(perPage)
     .sort({ [sortBy]: sortOrder, _id: 1 })
-    .populate('ingredients.id')
+    .populate('ingredients.id', 'name')
     .exec();
 
   const paginationData = calcaPaginationData({ page, perPage, totalItems });
@@ -58,7 +58,22 @@ export const getRecipes = async ({
 export const createNewRecipe = async (payload) => await Recipe.create(payload);
 
 export const getRecipeById = async (id) => {
-  return await Recipe.findById(id).populate('ingredients.id');
+  const recipe = await Recipe.findById(id);
+
+  if (!recipe) return null;
+  const ingredientIds = recipe.ingredients.map((ing) => ing.id);
+
+  const ingredients = await Ingredient.find({ _id: { $in: ingredientIds } });
+  const ingredientMap = {};
+  ingredients.forEach((ing) => {
+    ingredientMap[ing._id.toString()] = ing;
+  });
+  recipe.ingredients = recipe.ingredients.map((ing) => ({
+    ...ing,
+    name: ingredientMap[ing.id]?.name || null,
+  }));
+  console.log(recipe);
+  return recipe;
 };
 
 export const deleteOwnRecipe = async (id) => await Recipe.findByIdAndDelete(id);

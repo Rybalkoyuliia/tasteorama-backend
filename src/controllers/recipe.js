@@ -52,7 +52,6 @@ export const createNewRecipeController = async (req, res) => {
 export const getRecipeByIdController = async (req, res) => {
   const { id } = req.params;
   const recipe = await getRecipeById(id);
-
   if (!recipe) {
     return res.status(404).json({
       status: 404,

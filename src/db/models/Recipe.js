@@ -26,13 +26,15 @@ const recipeSchema = new Schema(
     },
     category: {
       type: String,
-      ref: 'Category',
       required: true,
+    },
+    area: {
+      type: String,
     },
     ingredients: [
       {
         id: {
-          type: String,
+          type: Schema.Types.ObjectId,
           ref: 'Ingredient',
           required: true,
         },
@@ -52,7 +54,7 @@ const recipeSchema = new Schema(
       maxlength: 255,
     },
     owner: {
-      type: String,
+      type: Schema.Types.ObjectId,
       ref: 'users',
       required: true,
     },
@@ -62,8 +64,10 @@ const recipeSchema = new Schema(
     timestamps: true,
   },
 );
+
 recipeSchema.post('save', saveErrorHandler);
 recipeSchema.pre('findOneAndUpdate', setUpdateSettings);
-export const recipesSortFields = ['Category', 'Ingredient'];
+
+export const recipesSortFields = ['category', 'ingredients.id'];
 
 export const Recipe = model('Recipe', recipeSchema);
