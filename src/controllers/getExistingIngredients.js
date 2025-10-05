@@ -1,23 +1,35 @@
 import { Recipe } from '../db/models/Recipe.js';
 
-export const getExistingIngredients = async (_, res, next) => {
+export const getExistingIngredients = async (req, res, next) => {
   try {
+    const { category } = req.query;
+
     const usedIngredients = await Recipe.aggregate([
+      {
+        $match: {
+          category: category,
+        },
+      },
       { $unwind: '$ingredients' },
-      { $group: { _id: '$ingredients.id' } },
+      {
+        $group: {
+          _id: '$ingredients.id',
+        },
+      },
       {
         $lookup: {
           from: 'ingredients',
           localField: '_id',
           foreignField: '_id',
-          as: 'usedInRecipes',
+          as: 'ingredientData',
         },
       },
-      { $unwind: '$usedInRecipes' },
       {
-        $project: {
-          _id: 1,
-          name: '$usedInRecipes.name',
+        $unwind: '$ingredientData',
+      },
+      {
+        $replaceRoot: {
+          newRoot: '$ingredientData',
         },
       },
       {

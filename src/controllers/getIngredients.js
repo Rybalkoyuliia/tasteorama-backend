@@ -1,6 +1,6 @@
 import { Ingredient } from '../db/models/Ingredient.js';
 
-export const getIngredients = async (req, res, next) => {
+export const getIngredients = async (_, res, next) => {
   try {
     const ingredients = await Ingredient.find().sort({ name: 1 });
     res.status(200).json(ingredients);
